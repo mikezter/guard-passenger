@@ -2,7 +2,7 @@ module Guard
   class Passenger
     module Runner
       class << self
-        
+
         def restart_passenger
            succeed = system("touch tmp/restart.txt")
            if succeed
@@ -12,10 +12,10 @@ module Guard
            end
            succeed
         end
-        
-        def start_passenger(port, environment)
+
+        def start_passenger(port, environment, args = "")
           if passenger_standalone_installed?
-            succeed = system("passenger start -p #{port} -d -e #{environment}")
+            succeed = system("passenger start -p #{port} -d -e #{environment} #{args}")
             if succeed
               UI.info "Passenger standalone (port #{port}) started."
             else
@@ -27,7 +27,7 @@ module Guard
             false
           end
         end
-        
+
         def stop_passenger(port)
           succeed = system("passenger stop -p #{port}")
           if succeed
@@ -37,7 +37,7 @@ module Guard
           end
           succeed
         end
-        
+
         def passenger_standalone_installed?
           begin
             gem "passenger", ">=3.0.0"
@@ -46,7 +46,7 @@ module Guard
           end
           true
         end
-        
+
       end
     end
   end

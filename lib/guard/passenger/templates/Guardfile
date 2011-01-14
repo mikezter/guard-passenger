@@ -1,4 +1,4 @@
-guard 'passenger' do
+guard 'passenger', :args => '' do
   watch('lib/.*\.rb')
   watch('config/.*\.rb')
 end
